@@ -18,3 +18,12 @@ func RuleDao2Domain(rule dao.Rule) Rule {
 		Value:     rule.Value,
 	}
 }
+
+func RuleDomain2Dao(rule Rule) dao.Rule {
+	return dao.Rule{
+		Id:        rule.Id,
+		Attribute: rule.Attribute,
+		Operator:  rule.Operator,
+		Value:     rule.Value,
+	}
+}

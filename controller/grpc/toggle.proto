@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package toggle;
 
-option go_package = "./proto/toggle";
+option go_package = "./proto";
 
 message FindAllReq {}
 
@@ -34,6 +34,15 @@ message FindAllResp {
   repeated Toggle toggles = 1;
 }
 
+message InsertOneReq {
+  Toggle toggle = 1;
+}
+
+message InsertOneResp {
+  bool result = 1;
+}
+
 service RPCToggleService {
   rpc FindAll(FindAllReq) returns (FindAllResp);
+  rpc InsertOne(InsertOneReq) returns (InsertOneResp);
 }

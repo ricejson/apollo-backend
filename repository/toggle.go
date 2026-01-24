@@ -28,3 +28,11 @@ func (repo *DefaultToggleRepository) FindAll(ctx context.Context) ([]domain.Togg
 	return results, nil
 
 }
+
+func (repo *DefaultToggleRepository) InsertOne(ctx context.Context, toggle domain.Toggle) (bool, error) {
+	res, err := repo.toggleDAO.InsertOne(ctx, domain.ToggleDomain2Dao(toggle))
+	if err != nil {
+		return false, err
+	}
+	return res, nil
+}

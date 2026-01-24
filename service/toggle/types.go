@@ -8,4 +8,5 @@ import (
 // ToggleService 开关服务
 type ToggleService interface {
 	FindAll(ctx context.Context) ([]domain.Toggle, error)
+	InsertToggle(ctx context.Context, toggle domain.Toggle) (bool, error)
 }

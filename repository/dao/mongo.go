@@ -2,6 +2,7 @@ package dao
 
 import (
 	"context"
+	"errors"
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"log"
@@ -34,4 +35,15 @@ func (dao *MongoToggleDAO) List(ctx context.Context) ([]Toggle, error) {
 		toggles = append(toggles, toggle)
 	}
 	return toggles, nil
+}
+
+func (dao *MongoToggleDAO) InsertOne(ctx context.Context, toggle Toggle) (bool, error) {
+	result, err := dao.col.InsertOne(ctx, toggle)
+	if err != nil {
+		return false, err
+	}
+	if result.InsertedID == nil || !result.Acknowledged {
+		return false, errors.New("inserted id is null")
+	}
+	return true, nil
 }

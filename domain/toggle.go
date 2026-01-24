@@ -30,3 +30,20 @@ func ToggleDao2Domain(toggle dao.Toggle) Toggle {
 		Audiences:   audiences,
 	}
 }
+
+func ToggleDomain2Dao(toggle Toggle) dao.Toggle {
+	audiences := make([]dao.Audience, len(toggle.Audiences))
+	for i, audience := range toggle.Audiences {
+		audiences[i] = AudienceDDomain2Dao(audience)
+	}
+	return dao.Toggle{
+		Id:          toggle.Id,
+		Name:        toggle.Name,
+		Key:         toggle.Key,
+		Description: toggle.Description,
+		Status:      toggle.Status,
+		CreateAt:    toggle.CreateAt,
+		UpdateAt:    toggle.UpdateAt,
+		Audiences:   audiences,
+	}
+}
