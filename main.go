@@ -2,13 +2,14 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/ricejson/apollo-backend/controller/grpc/proto"
+	grpc2 "github.com/ricejson/apollo-backend/controller/grpc"
 	http2 "github.com/ricejson/apollo-backend/controller/http"
 	"github.com/ricejson/apollo-backend/models/mongodb"
 	_ "github.com/ricejson/apollo-backend/models/mongodb"
 	"github.com/ricejson/apollo-backend/repository"
 	"github.com/ricejson/apollo-backend/repository/dao"
 	"github.com/ricejson/apollo-backend/service/toggle"
+	proto2 "github.com/ricejson/apollo-idl-go/proto"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -22,7 +23,7 @@ func main() {
 	go func() {
 		// 测试grpc
 		s := grpc.NewServer()
-		proto.RegisterRPCToggleServiceServer(s, proto.NewGRPCToggleServerImpl(toggleService))
+		proto2.RegisterRPCToggleServiceServer(s, grpc2.NewGRPCToggleServerImpl(toggleService))
 		listen, err := net.Listen("tcp", ":8992")
 		if err != nil {
 			log.Fatalf("failed to listen: %v", err)

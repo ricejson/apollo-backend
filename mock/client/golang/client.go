@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/ricejson/apollo-backend/controller/grpc/proto"
+	"github.com/ricejson/apollo-idl-go/proto"
 	"google.golang.org/grpc"
 	"log"
 )
