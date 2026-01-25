@@ -20,3 +20,15 @@ func AudienceDao2Domain(audience dao.Audience) Audience {
 		Rules: rules,
 	}
 }
+
+func AudienceDDomain2Dao(audience Audience) dao.Audience {
+	rules := make([]dao.Rule, len(audience.Rules))
+	for i, rule := range audience.Rules {
+		rules[i] = RuleDomain2Dao(rule)
+	}
+	return dao.Audience{
+		Id:    audience.Id,
+		Name:  audience.Name,
+		Rules: rules,
+	}
+}
