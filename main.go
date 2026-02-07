@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	grpc2 "github.com/ricejson/apollo-backend/controller/grpc"
 	http2 "github.com/ricejson/apollo-backend/controller/http"
@@ -31,6 +32,14 @@ func main() {
 		s.Serve(listen)
 	}()
 	server := gin.Default()
+	// 使用cors中间件
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"} // 允许所有源访问
+	config.AllowMethods = []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"}
+	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Cookie"}
+	config.AllowCredentials = true // 允许携带cookie
+
+	server.Use(cors.New(config))
 
 	toggleController := http2.NewToggleController(toggleService)
 	toggleController.RegisterServices(server)
