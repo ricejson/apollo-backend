@@ -25,7 +25,7 @@ func init() {
 		Failed:    func(ctx context.Context, errEvent *event.CommandFailedEvent) {},
 	}
 	// 2. 建立连接
-	opts := options.Client().ApplyURI("mongodb://root:example@localhost:27017").SetMonitor(monitor)
+	opts := options.Client().ApplyURI("mongodb://root:37zl3M4X42V3z3Ei@dbconn.sealoshzh.site:34949/?directConnection=true").SetMonitor(monitor)
 	c, err := mongo.Connect(opts)
 	if err != nil {
 		log.Fatal(err)
